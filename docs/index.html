@@ -1,69 +1,70 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/main.css">
     <title>Document</title>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">ToDoList</span>
-    </nav>
-</header>
+<div class="col d-none d-lg-block py-2 bg-white">
+    <a class="navbar-brand font-weight-bold">ToDoList</a>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light control sticky-top">
+    <a class="d-block d-lg-none navbar-brand font-weight-bold">ToDoList</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<main>
-    <div class="control sticky-top bg-white mx-2 py-3">
-        <div class="nav nav-pills nav-fill">
-            <div class="col-lg-4 nav-item px-1 pb-2 pb-lg-0">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Search by title:</span>
-                    </div>
-                    <input type="text" class="form-control search" aria-label="Username" aria-describedby="basic-addon1">
+    <div class="collapse navbar-collapse pt-3 pt-lg-0" id="navbarSupportedContent">
+        <div class="col-lg-4 nav-item px-1 pb-2 pb-lg-0">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Search by title:</span>
                 </div>
-            </div>
-            <div class="col-lg-3 nav-item px-1 pb-2 pb-lg-0">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Status:</span>
-                    </div>
-                    <select class="form-control status">
-                        <option value="all">All</option>
-                        <option value="false">Open</option>
-                        <option value="true">Done</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-lg-3 nav-item px-1 pb-2 pb-lg-0">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Priority:</span>
-                    </div>
-                    <select class="form-control priority">
-                        <option value="all">All</option>
-                        <option value="2">High</option>
-                        <option value="1">Normal</option>
-                        <option value="0">Low</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-lg-2 nav-item px-1 pb-2 pb-lg-0">
-                <button
-                        type="button"
-                        class="btn btn-primary btn-block create"
-                        data-toggle="modal"
-                        data-target="#taskModal"
-                >
-                    Create
-                </button>
+                <input type="text" class="form-control search" aria-label="Username" aria-describedby="basic-addon1">
             </div>
         </div>
+        <div class="col-lg-3 nav-item px-1 pb-2 pb-lg-0">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Status:</span>
+                </div>
+                <select class="form-control status">
+                    <option value="all">All</option>
+                    <option value="false">Open</option>
+                    <option value="true">Done</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3 nav-item px-1 pb-2 pb-lg-0">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Priority:</span>
+                </div>
+                <select class="form-control priority">
+                    <option value="all">All</option>
+                    <option value="2">High</option>
+                    <option value="1">Normal</option>
+                    <option value="0">Low</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-2 nav-item px-1 pb-2 pb-lg-0">
+            <button
+                    type="button"
+                    class="btn btn-primary btn-block create"
+                    data-toggle="modal"
+                    data-target="#taskModal"
+            >
+                Create
+            </button>
+        </div>
     </div>
+</nav>
 
+<main>
     <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

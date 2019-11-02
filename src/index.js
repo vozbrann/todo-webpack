@@ -89,7 +89,6 @@ function searchByTitles(tasks) {
 
 function filterByStatus(tasks) {
     let filterStatus = document.querySelector('.status').value;
-    console.log(filterStatus);
     if (filterStatus === 'all') return tasks;
     if (filterStatus) {
         return tasks.filter(a => (a.isDone.toString() === filterStatus));
@@ -172,9 +171,7 @@ function addModalsEventListeners(id = null) {
             e.preventDefault();
             e.stopPropagation();
             taskModalForm.classList.add('was-validated');
-            console.log("invalid")
         } else {
-            console.log("valid")
             let title = taskModalForm.querySelector(".title").value;
             let description = taskModalForm.querySelector(".description").value;
             let priority = taskModalForm.querySelector(".priority").value;
