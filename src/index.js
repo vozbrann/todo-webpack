@@ -56,7 +56,7 @@ function createTaskHTMLElement({id, title, description, priority, isDone}) {
                     <div class="interact">
                         <div class="row">
                             <div class="col">
-                                <span class="btn bg-secondary text-white btn-sm">${priority === 3 ? "High" : priority === 2 ? "Normal" : "Low"}</span>
+                                ${priority === "2" ? "<span class=\"btn bg-danger text-white btn-sm\">High</span>" : priority === "1" ? "<span class=\"btn bg-warning text-white btn-sm\">Normal</span>" : "<span class=\"btn bg-primary text-white btn-sm\">Low</span>"}
                             </div>
                             <div class="col d-flex justify-content-end">
                                 <div class="btn-group">
@@ -177,7 +177,7 @@ function emptyModal() {
     let taskModalForm = document.querySelector('.taskModalForm');
     taskModalForm.querySelector(".title").value = '';
     taskModalForm.querySelector(".description").value = '';
-    taskModalForm.querySelector(".priority").value = '3';
+    taskModalForm.querySelector(".priority").value = 2;
 }
 
 function deleteTask(id) {
