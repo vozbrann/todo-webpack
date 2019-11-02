@@ -18,9 +18,10 @@ function addControlEventListeners() {
             }
         }
     }
-    document.querySelector('.search').addEventListener('input', function (event) {
+    document.querySelector('.control').addEventListener('input', function (event) {
         refreshTasks();
     });
+
 }
 
 function defaultSort(list) {
@@ -78,17 +79,40 @@ function createTaskHTMLElement({id, title, description, priority, isDone}) {
     `
 }
 
+function searchByTitles(tasks) {
+    let searchVal = document.querySelector('.search').value;
+    if (searchVal) {
+        return tasks.filter(a => (a.title.toLowerCase().includes(searchVal.toLowerCase())));
+    }
+    return tasks;
+}
+
+function filterByStatus(tasks) {
+    let filterStatus = document.querySelector('.status').value;
+    console.log(filterStatus);
+    if (filterStatus === 'all') return tasks;
+    if (filterStatus) {
+        return tasks.filter(a => (a.isDone.toString() === filterStatus));
+    }
+    return tasks;
+}
+
+function filterByPriority(tasks) {
+    let filterPriority = document.querySelector('.priority').value;
+    if (filterPriority === 'all') return tasks;
+    if (filterPriority) {
+        return tasks.filter(a => (a.priority.toString() === filterPriority));
+    }
+    return tasks;
+}
+
 function refreshTasks() {
     let taskRow = document.querySelector('.taskListRow');
     taskRow.innerHTML = '';
 
     let tasks = defaultSort(getAllTasksFromLocalStorage());
 
-    let searchVal = document.querySelector('.search').value;
-    if (searchVal) {
-        tasks = tasks.filter(a => (a.title.includes(searchVal)));
-    }
-    tasks.forEach(item => {
+    filterByPriority(filterByStatus(searchByTitles(tasks))).forEach(item => {
         taskRow.innerHTML += createTaskHTMLElement(item);
     });
     addTasksEventListeners();
