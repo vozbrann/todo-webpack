@@ -18,7 +18,7 @@
 <main>
     <div class="control sticky-top bg-white mx-2 py-3">
         <div class="nav nav-pills nav-fill">
-            <div class="col-lg-4 nav-item px-1">
+            <div class="col-lg-4 nav-item px-1 pb-2 pb-lg-0">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Search by title:</span>
@@ -26,7 +26,7 @@
                     <input type="text" class="form-control search" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </div>
-            <div class="col-lg-3 nav-item px-1">
+            <div class="col-lg-3 nav-item px-1 pb-2 pb-lg-0">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Status:</span>
@@ -38,7 +38,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-lg-3 nav-item px-1">
+            <div class="col-lg-3 nav-item px-1 pb-2 pb-lg-0">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Priority:</span>
@@ -51,12 +51,12 @@
                     </select>
                 </div>
             </div>
-            <div class="col-lg-2 nav-item px-1">
+            <div class="col-lg-2 nav-item px-1 pb-2 pb-lg-0">
                 <button
                         type="button"
-                        class="btn btn-primary btn-block"
+                        class="btn btn-primary btn-block create"
                         data-toggle="modal"
-                        data-target="#createTaskModal"
+                        data-target="#taskModal"
                 >
                     Create
                 </button>
@@ -64,10 +64,10 @@
         </div>
     </div>
 
-    <div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form class="needs-validation createTaskModalForm" novalidate>
+                <form class="needs-validation taskModalForm" novalidate>
                     <div class="modal-header">
                         <h5 class="modal-title">Add new <span class="badge badge-pill badge-primary">task</span></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
