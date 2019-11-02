@@ -9,8 +9,114 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello</h1>
-    <button type="button" class="btn btn-primary">Primary</button>
-    <script src="./js/main.js"></script>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">ToDoList</span>
+    </nav>
+</header>
+
+<main>
+    <div class="control sticky-top bg-white mx-2 py-3">
+        <div class="nav nav-pills nav-fill">
+            <div class="col-lg-4 nav-item px-1">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Search by title:</span>
+                    </div>
+                    <input type="text" class="form-control search" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+            <div class="col-lg-3 nav-item px-1">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Status:</span>
+                    </div>
+                    <select class="form-control">
+                        <option>All</option>
+                        <option>Open</option>
+                        <option>Done</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3 nav-item px-1">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Priority:</span>
+                    </div>
+                    <select class="form-control">
+                        <option>All</option>
+                        <option>High</option>
+                        <option>Normal</option>
+                        <option>Low</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-2 nav-item px-1">
+                <button
+                        type="button"
+                        class="btn btn-primary btn-block"
+                        data-toggle="modal"
+                        data-target="#createTaskModal"
+                >
+                    Create
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="needs-validation createTaskModalForm" novalidate>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add new <span class="badge badge-pill badge-primary">task</span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-form-label">Title:</label>
+                            <input type="text" class="form-control title" maxlength="20" required>
+                            <div class="invalid-feedback">
+                                Please enter a title.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Description:</label>
+                            <textarea class="form-control description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Priority</label>
+                            <select class="form-control priority required">
+                                <option value="2">High</option>
+                                <option value="1">Normal</option>
+                                <option value="0">Low</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closeModal" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary addNewTaskButton">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container taskList py-3 mb-5">
+        <div class="row taskListRow">
+
+        </div>
+    </div>
+</main>
+
+<footer class="fixed-bottom bg-light">
+    <div class="container py-3 text-right">
+        <span class="font-weight-bold">Roman Vozbrannyi</span>
+    </div>
+</footer>
+
+<script src="./js/main.js"></script>
 </body>
 </html>
