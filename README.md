@@ -7,10 +7,11 @@ Desc...
 ### Display tasks
 ![alt text](screenshots/default%20view.jpg)
 All user tasks displayed in the center of the window.
+Tasks are sorted by priority and status.
 
 ### Create task
 ![alt text](screenshots/add%20task.jpg)
-You need to click "Create" button on the top right to open modal
+You need to click "Create" button on the top right to open modal.
 
 ![alt text](screenshots/add%20task%20modal.jpg)
 1) Required field "Title" (max length = 20).
@@ -29,3 +30,10 @@ Invalid input example.
 ![alt text](screenshots/edit%20modal.jpg)
 'Edit modal' is the same as "Add modal" but filled with data of selected task.
 
+![alt text](screenshots/edit%20done.jpg)
+You can edit only undone tasks.
+
+### Change task status
+![alt text](screenshots/status.jpg)
+1. To change task you need to click "..." on the task.
+2. Click "Done" / "Undone" in the dropdown menu.

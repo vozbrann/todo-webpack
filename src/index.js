@@ -81,7 +81,7 @@ function createTaskHTMLElement({
                                   ...
                               </button>
                               <div class="dropdown-menu dropdown-menu-right">
-                                  <button class="dropdown-item isDone" data_id="${id}" type="button">Done</button>
+                                  ${(!isDone && `<button class="dropdown-item isDone" data_id="${id}" type="button">Done</button>`) || (`<button class="dropdown-item isDone" data_id="${id}" type="button">Undone</button>`)}
                                   ${(!isDone && `<button class="dropdown-item edit" data-toggle="modal"
                                       data-target="#taskModal" data_id="${id}" type="button">Edit</button>`) || ('')}
                                   <button class="dropdown-item delete" data_id="${id}" type="button">Delete</button>
