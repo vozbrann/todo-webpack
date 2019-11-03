@@ -18,6 +18,10 @@ module.exports = {
   rules: {
     "linebreak-style": 0,
     "no-console": 2,
+    'no-use-before-define': [
+      'error',
+      { functions: false, classes: false, variables: true },
+    ],
   },
   parser: "babel-eslint"
 };

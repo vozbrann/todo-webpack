@@ -1,5 +1,8 @@
 import 'bootstrap';
 import './scss/custom.scss';
+import {
+  deleteTask, addNewTask, getAllTasks, getTask,
+} from './utils/api';
 
 document.addEventListener('DOMContentLoaded', ready);
 
@@ -44,8 +47,8 @@ function createTaskHTMLElement({
   return `
         <div class="col-lg-4 mb-3 task">
                 
-                ${(isDone && '<div class="shadow-sm bg-light p-3">')
-                  || '<div class="shadow-sm p-3">'}
+                ${(isDone && '<div class="shadow-sm bg-light p-3 h-100">')
+                  || '<div class="shadow-sm p-3 h-100">'}
                     <div class="row">
                         <div class="col-9">
                             <h5 class="title text-wrap text-break">${title}</h5>
@@ -119,7 +122,7 @@ function refreshTasks() {
   const taskRow = document.querySelector('.taskListRow');
   taskRow.innerHTML = '';
 
-  const tasks = defaultSort(getAllTasksFromLocalStorage());
+  const tasks = defaultSort(getAllTasks());
 
   filterByPriority(filterByStatus(searchByTitles(tasks))).forEach((item) => {
     taskRow.innerHTML += createTaskHTMLElement(item);
@@ -149,7 +152,7 @@ function changeTaskStatus(id) {
   localStorage.setItem(
     'tasks',
     JSON.stringify(
-      getAllTasksFromLocalStorage().map((item) => {
+      getAllTasks().map((item) => {
         if (item.id === id) {
           return {
             ...item,
@@ -166,7 +169,7 @@ function showModal(id = null) {
   emptyModal();
   if (id) {
     const taskModal = document.querySelector('#taskModal');
-    const { title, description, priority } = getTaskFromLocalStorage(id);
+    const { title, description, priority } = getTask(id);
 
     taskModal.querySelector('.title').value = title || '';
     taskModal.querySelector('.description').value = description || '';
@@ -193,7 +196,7 @@ function addModalsEventListeners(id = null) {
       if (id) {
         deleteTask(id);
       }
-      addNewTaskToLocalStorage({
+      addNewTask({
         id: id || generateId(),
         title,
         description,
@@ -214,23 +217,4 @@ function emptyModal() {
   taskModalForm.querySelector('.title').value = '';
   taskModalForm.querySelector('.description').value = '';
   taskModalForm.querySelector('.priority').value = 2;
-}
-
-function deleteTask(id) {
-  localStorage.setItem(
-    'tasks',
-    JSON.stringify(getAllTasksFromLocalStorage().filter((item) => item.id !== id)),
-  );
-}
-
-function getAllTasksFromLocalStorage() {
-  return JSON.parse(localStorage.getItem('tasks')) || [];
-}
-
-function addNewTaskToLocalStorage(task) {
-  localStorage.setItem('tasks', JSON.stringify([...getAllTasksFromLocalStorage(), task]));
-}
-
-function getTaskFromLocalStorage(id) {
-  return getAllTasksFromLocalStorage().find((item) => item.id === id);
 }
