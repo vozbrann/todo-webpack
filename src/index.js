@@ -1,8 +1,11 @@
 import 'bootstrap';
 import './scss/custom.scss';
 import {
-  deleteTask, addNewTask, getAllTasks, getTask,
-} from './utils/api';
+  deleteTask,
+  addNewTask,
+  getAllTasks,
+  getTask,
+} from './utils/interface';
 
 document.addEventListener('DOMContentLoaded', ready);
 
@@ -46,49 +49,51 @@ function createTaskHTMLElement({
 }) {
   return `
         <div class="col-lg-4 mb-3 task">
-                
-                ${(isDone && '<div class="shadow-sm bg-light p-3 h-100">')
-                  || '<div class="shadow-sm p-3 h-100">'}
-                    <div class="row">
-                        <div class="col-9">
-                            <h5 class="title text-wrap text-break">${title}</h5>
-                        </div>
-                        ${(isDone
-                          && `
-                            <div class="col-3">
-                                <img src="http://www.pngmart.com/files/3/Green-Tick-Transparent-PNG.png" width="40px" alt="">
-                            </div>`)
-                          || ''}
+          ${(isDone && '<div class="shadow-sm bg-light p-3 h-100">')
+            || '<div class="shadow-sm p-3 h-100">'}
+            <div class="row h-100">
+              <div class="col-12">
+                <div class="row">
+                    <div class="col-9">
+                        <h5 class="title text-wrap text-break">${title}</h5>
                     </div>
-                    <p class="descriptionText text-wrap text-break">${description}</p>
-                    <div class="interact">
-                        <div class="row">
-                            <div class="col">
-                                ${
-                                  priority === '2'
-                                    ? '<span class="btn bg-danger text-white btn-sm">High</span>'
-                                    : priority === '1'
-                                    ? '<span class="btn bg-warning text-white btn-sm">Normal</span>'
-                                    : '<span class="btn bg-primary text-white btn-sm">Low</span>'
-                                }
-                            </div>
-                            <div class="col d-flex justify-content-end">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-secondary btn-sm px-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        ...
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <button class="dropdown-item isDone" data_id="${id}" type="button">Done</button>
-                                        <button class="dropdown-item edit" data-toggle="modal"
-                                            data-target="#taskModal" data_id="${id}" type="button">Edit</button>
-                                        <button class="dropdown-item delete" data_id="${id}" type="button">Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    ${(isDone && `
+                        <div class="col-3">
+                            <img src="http://www.pngmart.com/files/3/Green-Tick-Transparent-PNG.png" width="40px" alt="">
+                        </div>`) || ''}
                 </div>
+                <p class="descriptionText text-wrap text-break">${description}</p>
+              </div>
+              <div class="col-12 align-self-end interact">
+                  <div class="row">
+                      <div class="col">
+                          ${
+                            priority === '2'
+                              ? '<span class="btn bg-danger text-white btn-sm">High</span>'
+                              : priority === '1'
+                              ? '<span class="btn bg-warning text-white btn-sm">Normal</span>'
+                              : '<span class="btn bg-primary text-white btn-sm">Low</span>'
+                          }
+                      </div>
+                      <div class="col d-flex justify-content-end">
+                          <div class="btn-group">
+                              <button type="button" class="btn btn-secondary btn-sm px-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  ...
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                  <button class="dropdown-item isDone" data_id="${id}" type="button">Done</button>
+                                  <button class="dropdown-item edit" data-toggle="modal"
+                                      data-target="#taskModal" data_id="${id}" type="button">Edit</button>
+                                  <button class="dropdown-item delete" data_id="${id}" type="button">Delete</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
             </div>
+  
+          </div>
+        </div>
     `;
 }
 
