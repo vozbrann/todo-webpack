@@ -4,10 +4,28 @@ Desc...
 
 ## Usage
 
-#### Display tasks
+### Display tasks
 ![alt text](screenshots/default%20view.jpg)
-All user tasks displayed in the center of the window
+All user tasks displayed in the center of the window.
 
-#### Create task
+### Create task
 ![alt text](screenshots/add%20task.jpg)
-You need to click "Create" button on the top right
+You need to click "Create" button on the top right to open modal
+
+![alt text](screenshots/add%20task%20modal.jpg)
+1) Required field "Title" (max length = 20).
+2) Optional field "Description".
+3) Required field "Priority" (select from dropdown).
+4) Click "Save" button to save task to localstorage.
+
+![alt text](screenshots/form%20validation.jpg)
+Invalid input example.
+
+### Edit task
+![alt text](screenshots/edit.jpg)
+1. To edit task you need to click "..." on the task.
+2. Click "Edit" in the dropdown menu to open "Edit modal".
+
+![alt text](screenshots/edit%20modal.jpg)
+'Edit modal' is the same as "Add modal" but filled with data of selected task.
+

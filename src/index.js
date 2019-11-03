@@ -76,14 +76,14 @@ function createTaskHTMLElement({
                           }
                       </div>
                       <div class="col d-flex justify-content-end">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-secondary btn-sm px-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <div class="btn-group dropup">
+                              <button type="button" class="btn btn-secondary btn-sm px-2 " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   ...
                               </button>
                               <div class="dropdown-menu dropdown-menu-right">
                                   <button class="dropdown-item isDone" data_id="${id}" type="button">Done</button>
-                                  <button class="dropdown-item edit" data-toggle="modal"
-                                      data-target="#taskModal" data_id="${id}" type="button">Edit</button>
+                                  ${(!isDone && `<button class="dropdown-item edit" data-toggle="modal"
+                                      data-target="#taskModal" data_id="${id}" type="button">Edit</button>`) || ('')}
                                   <button class="dropdown-item delete" data_id="${id}" type="button">Delete</button>
                               </div>
                           </div>
