@@ -1,6 +1,6 @@
 # ToDoList
 
-Desc...
+Simple todo-list.
 
 ## Usage
 
@@ -9,6 +9,7 @@ Desc...
 All user tasks displayed in the center of the window.
 Tasks are sorted by priority and status.
 
+---
 ### Create task
 ![alt text](screenshots/add%20task.jpg)
 You need to click "Create" button on the top right to open modal.
@@ -22,6 +23,7 @@ You need to click "Create" button on the top right to open modal.
 ![alt text](screenshots/form%20validation.jpg)
 Invalid input example.
 
+---
 ### Edit task
 ![alt text](screenshots/edit.jpg)
 1. To edit task you need to click "..." on the task.
@@ -33,7 +35,30 @@ Invalid input example.
 ![alt text](screenshots/edit%20done.jpg)
 You can edit only undone tasks.
 
+---
 ### Change task status
 ![alt text](screenshots/status.jpg)
 1. To change task you need to click "..." on the task.
 2. Click "Done" / "Undone" in the dropdown menu.
+
+---
+### Delete task
+![alt text](screenshots/delete.jpg)
+1. To delete task you need to click "..." on the task.
+2. Click "Delete" in the dropdown.
+
+---
+### Search by title
+![alt text](screenshots/search.jpg)
+Input search value in the field to search by title.
+
+---
+### Filter by status
+![alt text](screenshots/filter%20by%20status.jpg)
+Select status to filter.
+
+---
+### Filter by priority
+![alt text](screenshots/filter%20by%20priority.jpg)
+Select priority to filter.
+
