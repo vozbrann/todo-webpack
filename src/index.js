@@ -76,7 +76,7 @@ function createTaskHTMLElement({
                           }
                       </div>
                       <div class="col d-flex justify-content-end">
-                          <div class="btn-group dropup">
+                          <div class="btn-group">
                               <button type="button" class="btn btn-secondary btn-sm px-2 " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   ...
                               </button>
