@@ -1,63 +1,73 @@
 import 'bootstrap';
 import './scss/custom.scss';
 
-document.addEventListener("DOMContentLoaded", ready);
+document.addEventListener('DOMContentLoaded', ready);
 
 function ready() {
-    refreshTasks();
-    addControlEventListeners();
-    addModalsEventListeners();
-    addTasksEventListeners();
+  refreshTasks();
+  addControlEventListeners();
+  addModalsEventListeners();
+  addTasksEventListeners();
 }
 
 function addControlEventListeners() {
-    document.querySelector('.control').onclick = function (e) {
-        if (e.target) {
-            if (e.target.matches(".create")) {
-                showModal();
-            }
-        }
+  document.querySelector('.control').onclick = (e) => {
+    if (e.target) {
+      if (e.target.matches('.create')) {
+        showModal();
+      }
     }
-    document.querySelector('.control').addEventListener('input', function (event) {
-        refreshTasks();
-    });
-
+  };
+  document.querySelector('.control').addEventListener('input', () => {
+    refreshTasks();
+  });
 }
 
 function defaultSort(list) {
-    return list.sort((a, b) => {
-        if (a.isDone === b.isDone) {
-            if (a.priority > b.priority) {
-                return -1;
-            }
-            return 1;
-        } else if (a.isDone > b.isDone) {
-            return 1;
-        }
+  return list.sort((a, b) => {
+    if (a.isDone === b.isDone) {
+      if (a.priority > b.priority) {
         return -1;
-    });
+      }
+      return 1;
+    }
+    if (a.isDone > b.isDone) {
+      return 1;
+    }
+    return -1;
+  });
 }
 
-function createTaskHTMLElement({id, title, description, priority, isDone}) {
-    return `
+function createTaskHTMLElement({
+  id, title, description, priority, isDone,
+}) {
+  return `
         <div class="col-lg-4 mb-3 task">
                 
-                ${isDone && `<div class="shadow-sm bg-light p-3">` || `<div class="shadow-sm p-3">`}
+                ${(isDone && '<div class="shadow-sm bg-light p-3">')
+                  || '<div class="shadow-sm p-3">'}
                     <div class="row">
                         <div class="col-9">
                             <h5 class="title text-wrap text-break">${title}</h5>
                         </div>
-                        ${isDone && `
+                        ${(isDone
+                          && `
                             <div class="col-3">
                                 <img src="http://www.pngmart.com/files/3/Green-Tick-Transparent-PNG.png" width="40px" alt="">
-                            </div>` || ``
-    }
+                            </div>`)
+                          || ''}
                     </div>
                     <p class="descriptionText text-wrap text-break">${description}</p>
                     <div class="interact">
                         <div class="row">
                             <div class="col">
-                                ${priority === "2" ? "<span class=\"btn bg-danger text-white btn-sm\">High</span>" : priority === "1" ? "<span class=\"btn bg-warning text-white btn-sm\">Normal</span>" : "<span class=\"btn bg-primary text-white btn-sm\">Low</span>"}
+                                ${
+                                  priority === '2'
+                                    ? '<span class="btn bg-danger text-white btn-sm">High</span>'
+                                    : priority === '1'
+                                    ? '<span class="btn bg-warning text-white btn-sm">Normal</span>'
+                                    : '<span class="btn bg-primary text-white btn-sm">Low</span>'
+                                }
                             </div>
                             <div class="col d-flex justify-content-end">
                                 <div class="btn-group">
@@ -76,145 +86,151 @@ function createTaskHTMLElement({id, title, description, priority, isDone}) {
                     </div>
                 </div>
             </div>
-    `
+    `;
 }
 
 function searchByTitles(tasks) {
-    let searchVal = document.querySelector('.search').value;
-    if (searchVal) {
-        return tasks.filter(a => (a.title.toLowerCase().includes(searchVal.toLowerCase())));
-    }
-    return tasks;
+  const searchVal = document.querySelector('.search').value;
+  if (searchVal) {
+    return tasks.filter((a) => a.title.toLowerCase().includes(searchVal.toLowerCase()));
+  }
+  return tasks;
 }
 
 function filterByStatus(tasks) {
-    let filterStatus = document.querySelector('.status').value;
-    if (filterStatus === 'all') return tasks;
-    if (filterStatus) {
-        return tasks.filter(a => (a.isDone.toString() === filterStatus));
-    }
-    return tasks;
+  const filterStatus = document.querySelector('.status').value;
+  if (filterStatus === 'all') return tasks;
+  if (filterStatus) {
+    return tasks.filter((a) => a.isDone.toString() === filterStatus);
+  }
+  return tasks;
 }
 
 function filterByPriority(tasks) {
-    let filterPriority = document.querySelector('.priority').value;
-    if (filterPriority === 'all') return tasks;
-    if (filterPriority) {
-        return tasks.filter(a => (a.priority.toString() === filterPriority));
-    }
-    return tasks;
+  const filterPriority = document.querySelector('.priority').value;
+  if (filterPriority === 'all') return tasks;
+  if (filterPriority) {
+    return tasks.filter((a) => a.priority.toString() === filterPriority);
+  }
+  return tasks;
 }
 
 function refreshTasks() {
-    let taskRow = document.querySelector('.taskListRow');
-    taskRow.innerHTML = '';
+  const taskRow = document.querySelector('.taskListRow');
+  taskRow.innerHTML = '';
 
-    let tasks = defaultSort(getAllTasksFromLocalStorage());
+  const tasks = defaultSort(getAllTasksFromLocalStorage());
 
-    filterByPriority(filterByStatus(searchByTitles(tasks))).forEach(item => {
-        taskRow.innerHTML += createTaskHTMLElement(item);
-    });
-    addTasksEventListeners();
+  filterByPriority(filterByStatus(searchByTitles(tasks))).forEach((item) => {
+    taskRow.innerHTML += createTaskHTMLElement(item);
+  });
+  addTasksEventListeners();
 }
 
 function addTasksEventListeners() {
-    let taskList = document.querySelector('.taskListRow');
-    taskList.onclick = function (e) {
-        if (e.target.matches(".delete")) {
-            const id = e.target.attributes.data_id.value;
-            deleteTask(id);
-            refreshTasks();
-        } else if (e.target.matches(".edit")) {
-            const id = e.target.attributes.data_id.value;
-            showModal(id);
-        } else if (e.target.matches(".isDone")) {
-            const id = e.target.attributes.data_id.value;
-            changeTaskStatus(id);
-            refreshTasks();
-        }
+  const taskList = document.querySelector('.taskListRow');
+  taskList.onclick = (e) => {
+    if (e.target.matches('.delete')) {
+      const id = e.target.attributes.data_id.value;
+      deleteTask(id);
+      refreshTasks();
+    } else if (e.target.matches('.edit')) {
+      const id = e.target.attributes.data_id.value;
+      showModal(id);
+    } else if (e.target.matches('.isDone')) {
+      const id = e.target.attributes.data_id.value;
+      changeTaskStatus(id);
+      refreshTasks();
     }
+  };
 }
 
 function changeTaskStatus(id) {
-    localStorage.setItem('tasks', JSON.stringify(getAllTasksFromLocalStorage().map(item => {
+  localStorage.setItem(
+    'tasks',
+    JSON.stringify(
+      getAllTasksFromLocalStorage().map((item) => {
         if (item.id === id) {
-            return {
-                ...item,
-                isDone: !item.isDone
-            };
+          return {
+            ...item,
+            isDone: !item.isDone,
+          };
         }
         return item;
-    })));
+      }),
+    ),
+  );
 }
 
 function showModal(id = null) {
-    emptyModal();
-    if (id) {
-        const taskModal = document.querySelector('#taskModal');
-        const {title, description, priority} = getTaskFromLocalStorage(id);
+  emptyModal();
+  if (id) {
+    const taskModal = document.querySelector('#taskModal');
+    const { title, description, priority } = getTaskFromLocalStorage(id);
 
-        taskModal.querySelector(".title").value = title || "";
-        taskModal.querySelector(".description").value = description || "";
-        taskModal.querySelector(".priority").value = priority || "";
-    }
+    taskModal.querySelector('.title').value = title || '';
+    taskModal.querySelector('.description').value = description || '';
+    taskModal.querySelector('.priority').value = priority || '';
+  }
 
-    addModalsEventListeners(id);
+  addModalsEventListeners(id);
 
-    const taskModalForm = document.querySelector('.taskModalForm');
-    taskModalForm.classList.remove('was-validated');
+  const taskModalForm = document.querySelector('.taskModalForm');
+  taskModalForm.classList.remove('was-validated');
 }
 
 function addModalsEventListeners(id = null) {
-    let taskModalForm = document.querySelector('.taskModalForm');
-    taskModalForm.onsubmit = function (e) {
-        if (taskModalForm.checkValidity() === false) {
-            e.preventDefault();
-            e.stopPropagation();
-            taskModalForm.classList.add('was-validated');
-        } else {
-            let title = taskModalForm.querySelector(".title").value;
-            let description = taskModalForm.querySelector(".description").value;
-            let priority = taskModalForm.querySelector(".priority").value;
-            if (id) {
-                deleteTask(id);
-            }
-            addNewTaskToLocalStorage({
-                id: id || generateId(),
-                title,
-                description,
-                priority,
-                isDone: false
-            });
-            refreshTasks();
-        }
+  const taskModalForm = document.querySelector('.taskModalForm');
+  taskModalForm.onsubmit = (e) => {
+    if (taskModalForm.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+      taskModalForm.classList.add('was-validated');
+    } else {
+      const title = taskModalForm.querySelector('.title').value;
+      const description = taskModalForm.querySelector('.description').value;
+      const priority = taskModalForm.querySelector('.priority').value;
+      if (id) {
+        deleteTask(id);
+      }
+      addNewTaskToLocalStorage({
+        id: id || generateId(),
+        title,
+        description,
+        priority,
+        isDone: false,
+      });
+      refreshTasks();
     }
+  };
 }
 
 function generateId() {
-    return `f${(+new Date).toString(16)}`;
+  return `f${(+new Date()).toString(16)}`;
 }
 
 function emptyModal() {
-    let taskModalForm = document.querySelector('.taskModalForm');
-    taskModalForm.querySelector(".title").value = '';
-    taskModalForm.querySelector(".description").value = '';
-    taskModalForm.querySelector(".priority").value = 2;
+  const taskModalForm = document.querySelector('.taskModalForm');
+  taskModalForm.querySelector('.title').value = '';
+  taskModalForm.querySelector('.description').value = '';
+  taskModalForm.querySelector('.priority').value = 2;
 }
 
 function deleteTask(id) {
-    localStorage.setItem('tasks', JSON.stringify(getAllTasksFromLocalStorage().filter(item => item.id !== id)));
+  localStorage.setItem(
+    'tasks',
+    JSON.stringify(getAllTasksFromLocalStorage().filter((item) => item.id !== id)),
+  );
 }
 
 function getAllTasksFromLocalStorage() {
-    return JSON.parse(localStorage.getItem('tasks')) || [];
+  return JSON.parse(localStorage.getItem('tasks')) || [];
 }
 
 function addNewTaskToLocalStorage(task) {
-    localStorage.setItem('tasks', JSON.stringify([...getAllTasksFromLocalStorage(), task]));
+  localStorage.setItem('tasks', JSON.stringify([...getAllTasksFromLocalStorage(), task]));
 }
 
 function getTaskFromLocalStorage(id) {
-    return getAllTasksFromLocalStorage().find(item => item.id === id);
+  return getAllTasksFromLocalStorage().find((item) => item.id === id);
 }
-
-

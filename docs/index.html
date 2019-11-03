@@ -1,123 +1,140 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="./css/main.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
     <title>Document</title>
-</head>
-<body>
-<div class="col d-none d-lg-block py-2 bg-white">
-    <a class="navbar-brand font-weight-bold">ToDoList</a>
-</div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light control sticky-top">
-    <a class="d-block d-lg-none navbar-brand font-weight-bold">ToDoList</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  </head>
+  <body>
+    <div class="col d-none d-lg-block py-2 bg-white">
+      <a class="navbar-brand font-weight-bold">ToDoList</a>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light control sticky-top">
+      <a class="d-block d-lg-none navbar-brand font-weight-bold">ToDoList</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
-    </button>
+      </button>
 
-    <div class="collapse navbar-collapse pt-3 pt-lg-0" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse pt-3 pt-lg-0" id="navbarSupportedContent">
         <div class="col-lg-4 nav-item px-1 pb-2 pb-lg-0">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Search by title:</span>
-                </div>
-                <input type="text" class="form-control search" aria-label="Username" aria-describedby="basic-addon1">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Search by title:</span>
             </div>
+            <input
+              type="text"
+              class="form-control search"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+            />
+          </div>
         </div>
         <div class="col-lg-3 nav-item px-1 pb-2 pb-lg-0">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Status:</span>
-                </div>
-                <select class="form-control status">
-                    <option value="all">All</option>
-                    <option value="false">Open</option>
-                    <option value="true">Done</option>
-                </select>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Status:</span>
             </div>
+            <select class="form-control status">
+              <option value="all">All</option>
+              <option value="false">Open</option>
+              <option value="true">Done</option>
+            </select>
+          </div>
         </div>
         <div class="col-lg-3 nav-item px-1 pb-2 pb-lg-0">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Priority:</span>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Priority:</span>
+            </div>
+            <select class="form-control priority">
+              <option value="all">All</option>
+              <option value="2">High</option>
+              <option value="1">Normal</option>
+              <option value="0">Low</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-2 nav-item px-1 pb-2 pb-lg-0">
+          <button
+            type="button"
+            class="btn btn-primary btn-block create"
+            data-toggle="modal"
+            data-target="#taskModal"
+          >
+            Create
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form class="needs-validation taskModalForm" novalidate>
+              <div class="modal-header">
+                <h5 class="modal-title">
+                  Add new <span class="badge badge-pill badge-primary">task</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label class="col-form-label">Title:</label>
+                  <input type="text" class="form-control title" maxlength="20" required />
+                  <div class="invalid-feedback">
+                    Please enter a title.
+                  </div>
                 </div>
-                <select class="form-control priority">
-                    <option value="all">All</option>
+                <div class="form-group">
+                  <label class="col-form-label">Description:</label>
+                  <textarea class="form-control description"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">Priority</label>
+                  <select class="form-control priority required">
                     <option value="2">High</option>
                     <option value="1">Normal</option>
                     <option value="0">Low</option>
-                </select>
-            </div>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary closeModal" data-dismiss="modal">
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary addNewTaskButton">Save</button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="col-lg-2 nav-item px-1 pb-2 pb-lg-0">
-            <button
-                    type="button"
-                    class="btn btn-primary btn-block create"
-                    data-toggle="modal"
-                    data-target="#taskModal"
-            >
-                Create
-            </button>
-        </div>
-    </div>
-</nav>
+      </div>
 
-<main>
-    <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form class="needs-validation taskModalForm" novalidate>
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add new <span class="badge badge-pill badge-primary">task</span></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label class="col-form-label">Title:</label>
-                            <input type="text" class="form-control title" maxlength="20" required>
-                            <div class="invalid-feedback">
-                                Please enter a title.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-form-label">Description:</label>
-                            <textarea class="form-control description"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-form-label">Priority</label>
-                            <select class="form-control priority required">
-                                <option value="2">High</option>
-                                <option value="1">Normal</option>
-                                <option value="0">Low</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary closeModal" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary addNewTaskButton">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+      <div class="container taskList py-3 mb-5">
+        <div class="row taskListRow"></div>
+      </div>
+    </main>
 
-    <div class="container taskList py-3 mb-5">
-        <div class="row taskListRow">
-
-        </div>
-    </div>
-</main>
-
-<footer class="fixed-bottom bg-white shadow">
-    <div class="container py-3 text-right">
+    <footer class="fixed-bottom bg-white shadow">
+      <div class="container py-3 text-right">
         <span class="font-weight-bold">Roman Vozbrannyi</span>
-    </div>
-</footer>
+      </div>
+    </footer>
 
-<script src="./js/main.js"></script>
-</body>
+    <script src="./js/main.js"></script>
+  </body>
 </html>
